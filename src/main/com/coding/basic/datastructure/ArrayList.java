@@ -6,10 +6,8 @@ package com.coding.basic.datastructure;
  */
 public class ArrayList implements List {
 
-    private int size = 0;
-
     private static final int DEFAULT_CAPACITY = 10;
-
+    private int size = 0;
     private Object[] elementData = null;
 
     public ArrayList() {
@@ -40,23 +38,27 @@ public class ArrayList implements List {
 
     @Override
     public Object get(int index) {
-        if (index < 0 || index > elementData.length) {
-            throw new IndexOutOfBoundsException();
-        }
+        checkRange(index);
         return elementData[index];
     }
 
     @Override
     public Object remove(int index) {
-        Object removedValue = elementData[index];
+        Object removedObject = elementData[index];
         System.arraycopy(elementData, index + 1, elementData, index, elementData.length - index - 1);
         elementData[--size] = null;
-        return removedValue;
+        return removedObject;
     }
 
     @Override
     public int size() {
         return size;
+    }
+
+    private void checkRange(int index) {
+        if (index < 0 || index > elementData.length) {
+            throw new IndexOutOfBoundsException();
+        }
     }
 
     private void checkCapacity(int size) {
@@ -83,6 +85,7 @@ public class ArrayList implements List {
 
         @Override
         public boolean hasNext() {
+            // TODO
             pos++;
             if (pos > size) {
                 return false;
@@ -92,11 +95,13 @@ public class ArrayList implements List {
 
         @Override
         public Object next() {
+            // TODO
             return elementData[pos];
         }
 
         @Override
         public Object remove() {
+            // TODO
             return null;
         }
     }

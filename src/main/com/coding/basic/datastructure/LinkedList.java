@@ -32,22 +32,9 @@ public class LinkedList implements List {
         }
     }
 
-    /*@Override
-    public void add(Object object) {
-        if (null == head) {
-            head = new Node(object);
-            head.next = null;
-        } else {
-            // 头插法
-            Node nextNode = new Node(object);
-            nextNode.next = head.next;
-            head.next = nextNode;
-        }
-    }*/
-
     @Override
     public void add(int index, Object object) {
-        checkElementIndex(index);
+        checkRange(index);
         if (null == head) {
             add(object);
             return;
@@ -65,7 +52,7 @@ public class LinkedList implements List {
 
     @Override
     public Object get(int index) {
-        checkElementIndex(index);
+        checkRange(index);
         checkNodeNotNull();
         Node node = node(index);
         return node.data;
@@ -73,7 +60,7 @@ public class LinkedList implements List {
 
     @Override
     public Object remove(int index) {
-        checkElementIndex(index);
+        checkRange(index);
         checkNodeNotNull();
         if (index == 0) {
             removeFirst();
@@ -121,7 +108,7 @@ public class LinkedList implements List {
         return head;
     }
 
-    private void checkElementIndex(int index) {
+    private void checkRange(int index) {
         if (index > size - 1 || index < 0) {
             throw new IndexOutOfBoundsException();
         }
@@ -142,8 +129,8 @@ public class LinkedList implements List {
     }
 
     private static class Node {
-        private Object data;
         Node next;
+        private Object data;
 
         public Node() {
 
@@ -163,5 +150,18 @@ public class LinkedList implements List {
             this.next = next;
         }
     }
+
+     /*@Override
+    public void add(Object object) {
+        if (null == head) {
+            head = new Node(object);
+            head.next = null;
+        } else {
+            // 头插法
+            Node nextNode = new Node(object);
+            nextNode.next = head.next;
+            head.next = nextNode;
+        }
+    }*/
 
 }
