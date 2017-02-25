@@ -5,10 +5,10 @@ import org.junit.Test;
 /**
  * Created by zt on 2017/2/19.
  */
-public class TestLinkedList {
+public class TestDataStructure {
 
     @Test
-    public void testAdd() {
+    public void testLinedList() {
         LinkedList list = new LinkedList();
         for (int i = 0; i < 5; i++) {
             list.add(i);
@@ -47,5 +47,20 @@ public class TestLinkedList {
         System.out.println("dqueue object : " + object);
         System.out.println(queue.isEmpty());
         System.out.println(queue.size());
+    }
+
+    @Test
+    public void testArrayList() {
+        List arrayList = new ArrayList();
+        for (int i = 0; i < 30; i++) {
+            arrayList.add(i);
+        }
+        arrayList.add(0, -2);
+        arrayList.add(1, -1);
+        System.out.println(arrayList.remove(1));
+        System.out.println("ArrayList size : " + arrayList.size());
+        for (int i = 0; i < arrayList.size(); i++) {
+            System.out.println(arrayList.get(i));
+        }
     }
 }

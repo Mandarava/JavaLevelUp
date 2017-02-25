@@ -1,5 +1,6 @@
 package com.coding.basic.datastructure;
 
+
 /**
  * Created by zt on 2017/2/19.
  */
@@ -24,28 +25,47 @@ public class ArrayList implements List {
 
     @Override
     public void add(Object o) {
+        checkCapacity(size + 1);
+        elementData[size] = o;
         size++;
     }
 
     @Override
     public void add(int index, Object o) {
+        checkCapacity(size + 1);
+        System.arraycopy(elementData, index, elementData, index + 1, size - index);
+        elementData[index] = o;
         size++;
     }
 
     @Override
     public Object get(int index) {
-        return null;
+        if (index < 0 || index > elementData.length) {
+            throw new IndexOutOfBoundsException();
+        }
+        return elementData[index];
     }
 
     @Override
     public Object remove(int index) {
-        size--;
-        return null;
+        Object removedValue = elementData[index];
+        System.arraycopy(elementData, index + 1, elementData, index, elementData.length - index - 1);
+        elementData[--size] = null;
+        return removedValue;
     }
 
     @Override
     public int size() {
         return size;
+    }
+
+    private void checkCapacity(int size) {
+        if (size > elementData.length) {
+            int newLength = elementData.length * 2;
+            Object[] newObject = new Object[newLength];
+            System.arraycopy(elementData, 0, newObject, 0, elementData.length);
+            elementData = newObject;
+        }
     }
 
     public Iterator iterator() {
