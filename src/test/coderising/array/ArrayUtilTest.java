@@ -36,6 +36,46 @@ public class ArrayUtilTest {
     }
 
     @Test
+    public void testFibonacci() {
+        int max = 1;
+        int[] expected = {};
+        Assert.assertArrayEquals(expected, arrayUtil.fibonacci(max));
+        int max2 = 15;
+        int[] expected2 = {1, 1, 2, 3, 5, 8, 13};
+        Assert.assertArrayEquals(expected2, arrayUtil.fibonacci(max2));
+    }
+
+    @Test
+    public void testGetPrimes() {
+        int[] expected = {2, 3, 5, 7, 11, 13, 17, 19};
+        int max = 23;
+        Assert.assertArrayEquals(expected, arrayUtil.getPrimes(max));
+    }
+
+    @Test
+    public void testMerge() {
+        int[] a1 = {3, 5, 7, 8};
+        int[] a2 = {4, 5, 6, 7};
+        int[] expected = {3, 4, 5, 6, 7, 8};
+        Assert.assertArrayEquals(expected, arrayUtil.merge(a1, a2));
+    }
+
+    @Test
+    public void testGetPerfectNumbers() {
+        int max = 6;
+        arrayUtil.getPerfectNumbers(max);
+    }
+
+    @Test
+    public void testGrow() {
+        int[] oldArray = {2, 3, 6};
+        int size = 3;
+        int[] newArray = arrayUtil.grow(oldArray, size);
+        int[] expected = {2, 3, 6, 0, 0, 0};
+        Assert.assertArrayEquals(expected, newArray);
+    }
+
+    @Test
     public void testJoin() {
         int[] array = {3, 8, 9};
         String seperator = "-";

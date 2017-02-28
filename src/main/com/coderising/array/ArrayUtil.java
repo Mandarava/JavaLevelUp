@@ -1,5 +1,11 @@
 package com.coderising.array;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
 public class ArrayUtil {
 
     /**
@@ -40,7 +46,14 @@ public class ArrayUtil {
      * 例如 a1 = [3, 5, 7,8]   a2 = [4, 5, 6,7]    则 a3 为[3,4,5,6,7,8]    , 注意： 已经消除了重复
      */
     public int[] merge(int[] array1, int[] array2) {
-        return null;
+        Set<Integer> set = new TreeSet<>();
+        for (int i = 0; i < array1.length; i++) {
+            set.add(array1[i]);
+        }
+        for (int i = 0; i < array2.length; i++) {
+            set.add(array2[i]);
+        }
+        return set2Array(set);
     }
 
     /**
@@ -50,7 +63,9 @@ public class ArrayUtil {
      * [2,3,6,0,0,0]
      */
     public int[] grow(int[] oldArray, int size) {
-        return null;
+        int[] newArray = new int[oldArray.length + size];
+        System.arraycopy(oldArray, 0, newArray, 0, oldArray.length);
+        return newArray;
     }
 
     /**
@@ -59,7 +74,25 @@ public class ArrayUtil {
      * max = 1, 则返回空数组 []
      */
     public int[] fibonacci(int max) {
-        return null;
+        List<Integer> list = new ArrayList<>();
+        for (int i = 1; i < max; i++) {
+            int f = fibonacci2(i);
+            if (f >= max) {
+                break;
+            } else {
+                list.add(f);
+            }
+        }
+        return list2Array(list);
+    }
+
+    public int fibonacci2(int n) {
+        if (n == 0) {
+            return 0;
+        } else if (n == 1) {
+            return 1;
+        }
+        return fibonacci2(n - 1) + fibonacci2(n - 2);
     }
 
     /**
@@ -67,7 +100,13 @@ public class ArrayUtil {
      * 例如max = 23, 返回的数组为[2,3,5,7,11,13,17,19]
      */
     public int[] getPrimes(int max) {
-        return null;
+        List<Integer> list = new ArrayList<>();
+        for (int i = 2; i < max; i++) {
+            if (isPrime(i)) {
+                list.add(i);
+            }
+        }
+        return list2Array(list);
     }
 
     /**
@@ -75,7 +114,19 @@ public class ArrayUtil {
      * 给定一个最大值max， 返回一个数组， 数组中是小于max 的所有完数
      */
     public int[] getPerfectNumbers(int max) {
-        return null;
+        List<Integer> list = new ArrayList<>();
+        for (int i = 1; i <= max; i++) {
+            int temp = 0;
+            for (int n = 1; n < i / 2 + 1; n++) {
+                if (i % n == 0) {
+                    temp += n;
+                }
+            }
+            if (temp == i) {
+                list.add(i);
+            }
+        }
+        return list2Array(list);
     }
 
     /**
@@ -94,5 +145,31 @@ public class ArrayUtil {
         return stringBuilder.toString();
     }
 
+    private int[] list2Array(List<Integer> list) {
+        int[] result = new int[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            result[i] = list.get(i);
+        }
+        return result;
+    }
+
+    private int[] set2Array(Set<Integer> set) {
+        int[] result = new int[set.size()];
+        Iterator<Integer> iterator = set.iterator();
+        int index = 0;
+        while (iterator.hasNext()) {
+            result[index++] = iterator.next();
+        }
+        return result;
+    }
+
+    private boolean isPrime(int num) {
+        for (int i = 2; i < num; i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 }
