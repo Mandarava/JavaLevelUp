@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 模拟struts2执行
+ * 模拟struts执行
  * 读取类似struts.xml文件，根据xml的定义创建相关的Action类来执行
  */
 public class Struts {
