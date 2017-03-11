@@ -8,7 +8,7 @@ import org.junit.Test;
 public class TestDataStructure {
 
     @Test
-    public void testLinedList() {
+    public void testLinkedList() {
         LinkedList list = new LinkedList();
         for (int i = 0; i < 5; i++) {
             list.add(i);
@@ -61,6 +61,42 @@ public class TestDataStructure {
         System.out.println("ArrayList size : " + arrayList.size());
         for (int i = 0; i < arrayList.size(); i++) {
             System.out.println(arrayList.get(i));
+        }
+    }
+
+    @Test
+    public void testReverseLinkedList() {
+        LinkedList linkedList = new LinkedList();
+        for (int i = 0; i < 10; i++) {
+            linkedList.add(i);
+        }
+        linkedList.reverse();
+        printLinkedList(linkedList);
+    }
+
+    @Test
+    public void testRemoveLinkedList() {
+        LinkedList linkedList = new LinkedList();
+        for (int i = 0; i < 10; i++) {
+            linkedList.add(i);
+        }
+        linkedList.remove(0, 3);
+        printLinkedList(linkedList);
+    }
+
+    @Test
+    public void testRemoveFirstHalf() {
+        LinkedList linkedList = new LinkedList();
+        for (int i = 0; i < 1; i++) {
+            linkedList.add(i);
+        }
+        linkedList.removeFirstHalf();
+        printLinkedList(linkedList);
+    }
+
+    private void printLinkedList(LinkedList linkedList) {
+        for (int i = 0; i < linkedList.size(); i++) {
+            System.out.print(linkedList.get(i) + ",");
         }
     }
 }
