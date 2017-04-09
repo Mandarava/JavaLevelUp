@@ -1,6 +1,7 @@
 package coderising.array;
 
-import com.coderising.array.ArrayUtil;
+
+import com.coding.basic.datastructure.array.ArrayUtil;
 
 import org.junit.Assert;
 import org.junit.Before;

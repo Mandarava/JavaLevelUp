@@ -1,4 +1,7 @@
-package com.coding.basic.datastructure;
+package com.coding.basic.datastructure.linklist;
+
+import com.coding.basic.datastructure.Iterator;
+import com.coding.basic.datastructure.List;
 
 /**
  * Created by zt on 2017/2/19.
@@ -14,30 +17,6 @@ public class LinkedList implements List {
     public LinkedList() {
 
     }
-
-    /**
-     * 假定当前链表和list均包含已升序排列的整数
-     * 从当前链表中取出那些list所指定的元素
-     * 例如当前链表 = 11->101->201->301->401->501->601->701
-     * listB = 1->3->4->6
-     * 返回的结果应该是[101,301,401,601]
-     */
-    public static int[] getElements(LinkedList list) {
-        return null;
-    }
-
-      /*@Override
-    public void add(Object object) {
-        if (null == head) {
-            head = new Node(object);
-            head.next = null;
-        } else {
-            // 头插法
-            Node nextNode = new Node(object);
-            nextNode.next = head.next;
-            head.next = nextNode;
-        }
-    }*/
 
     @Override
     public void add(Object object) {
@@ -55,6 +34,19 @@ public class LinkedList implements List {
             size++;
         }
     }
+
+      /*@Override
+    public void add(Object object) {
+        if (null == head) {
+            head = new Node(object);
+            head.next = null;
+        } else {
+            // 头插法
+            Node nextNode = new Node(object);
+            nextNode.next = head.next;
+            head.next = nextNode;
+        }
+    }*/
 
     @Override
     public void add(int index, Object object) {
@@ -160,6 +152,10 @@ public class LinkedList implements List {
         return node;
     }
 
+    public Iterator iterator() {
+        return new LinkedList.LinkedListIterator();
+    }
+
     public void reverse() {
         checkNodeNotNull();
 
@@ -192,7 +188,8 @@ public class LinkedList implements List {
     public void remove(int i, int length) {
         if (i == 0) {
             for (int j = 0; j < length; j++) {
-                removeFirst();
+                head = head.next;
+                size--;
             }
         } else {
             Node pre = node(i - 1);
@@ -204,11 +201,35 @@ public class LinkedList implements List {
     }
 
     /**
-     * 已知链表中的元素以值递增有序排列，并以单链表作存储结构。
-     * 从当前链表中中删除在list中出现的元素
+     * 假定当前链表和list均包含已升序排列的整数
+     * 从当前链表中取出那些list所指定的元素
+     * 例如当前链表 = 11->101->201->301->401->501->601->701
+     * listB = 1->3->4->6
+     * 返回的结果应该是[101,301,401,601]
      */
-    public void subtract(LinkedList list) {
-
+    public int[] getElements(LinkedList list) {
+        if (list == null) {
+            return null;
+        }
+        int[] result = new int[list.size()];
+        Iterator iterator = list.iterator();
+        int index = (int) iterator.next();
+        int currentIndex = 0;
+        int arrayIndex = 0;
+        Node p = head;
+        while (p != null) {
+            if (index == currentIndex) {
+                result[arrayIndex++] = (int) p.data;
+                if (iterator.hasNext()) {
+                    index = (int) iterator.next();
+                } else {
+                    return result;
+                }
+            }
+            currentIndex++;
+            p = p.next;
+        }
+        return null;
     }
 
     /**
@@ -216,7 +237,15 @@ public class LinkedList implements List {
      * 删除表中所有值相同的多余元素（使得操作后的线性表中所有元素的值均不相同）
      */
     public void removeDuplicateValues() {
-
+        Node p = head;
+        while (p.next != null) {
+            if (p.data.equals(p.next.data)) {
+                p.next = p.next.next;
+                size--;
+            } else {
+                p = p.next;
+            }
+        }
     }
 
     /**
@@ -224,15 +253,23 @@ public class LinkedList implements List {
      * 试写一高效的算法，删除表中所有值大于min且小于max的元素（若表中存在这样的元素）
      */
     public void removeRange(int min, int max) {
-
-    }
-
-    /**
-     * 假设当前链表和参数list指定的链表均以元素依值递增有序排列（同一表中的元素值各不相同）
-     * 现要求生成新链表C，其元素为当前链表和list中元素的交集，且表C中的元素有依值递增有序排列
-     */
-    public LinkedList intersection(LinkedList list) {
-        return null;
+        if (min > max) {
+            throw new RuntimeException("min is larger than max!");
+        }
+        int start = 0;
+        int end = 0;
+        Node node = head;
+        while (node != null) {
+            int data = (int) node.data;
+            if (data <= min) {
+                start++;
+                end++;
+            } else if (data < max) {
+                end++;
+            }
+            node = node.next;
+        }
+        this.remove(start, end - start);
     }
 
     private static class Node {
@@ -255,6 +292,29 @@ public class LinkedList implements List {
         public Node(Object data, Node next, Node prev) {
             this.data = data;
             this.next = next;
+        }
+    }
+
+    private class LinkedListIterator implements Iterator {
+
+        private Node cursor = head;
+
+        @Override
+        public boolean hasNext() {
+            return cursor != null;
+        }
+
+        @Override
+        public Object next() {
+            Object data = cursor.data;
+            cursor = cursor.next;
+            return data;
+        }
+
+        @Override
+        public Object remove() {
+            // TODO
+            return null;
         }
     }
 

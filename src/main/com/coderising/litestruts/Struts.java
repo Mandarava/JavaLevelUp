@@ -28,7 +28,7 @@ public class Struts {
 
     public View runAction(String actionName, Map<String, String> parameters) {
         // 读取配置文件struts.xml
-        Map<String, Action> configuration = this.xmlToList();
+        Map<String, Action> configuration = this.parseXML();
         if (null == configuration || configuration.size() == 0) {
             return null;
         }
@@ -64,7 +64,7 @@ public class Struts {
         return null;
     }
 
-    private Map<String, Action> xmlToList() {
+    private Map<String, Action> parseXML() {
         Map<String, Action> map = new HashMap<>();
         SAXReader saxReader = new SAXReader();
         Document document;
