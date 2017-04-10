@@ -25,6 +25,8 @@ public class LRUPageFrameTest {
         Assert.assertEquals("0,3,2", frame.toString());
         frame.access(4);
         Assert.assertEquals("4,0,3", frame.toString());
+        frame.access(3);
+        Assert.assertEquals("3,4,0", frame.toString());
     }
 
 }
