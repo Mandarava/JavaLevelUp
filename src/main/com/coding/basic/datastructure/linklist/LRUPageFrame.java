@@ -3,7 +3,7 @@ package com.coding.basic.datastructure.linklist;
 /**
  * 用双向链表实现LRU算法
  *
- * @author liuxin
+ * @author zt
  */
 public class LRUPageFrame {
 
