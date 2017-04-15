@@ -1,4 +1,4 @@
-package com.coding.basic.datastructure;
+package com.coding.basic.datastructure.stack;
 
 import com.coding.basic.datastructure.array.ArrayList;
 

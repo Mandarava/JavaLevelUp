@@ -2,6 +2,7 @@ package com.coding.basic.datastructure;
 
 import com.coding.basic.datastructure.array.ArrayList;
 import com.coding.basic.datastructure.linklist.LinkedList;
+import com.coding.basic.datastructure.stack.Stack;
 
 import org.junit.Test;
 
