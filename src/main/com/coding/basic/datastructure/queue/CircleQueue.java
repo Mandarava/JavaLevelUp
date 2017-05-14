@@ -25,11 +25,13 @@ public class CircleQueue<E> {
     }
 
     public boolean isFull() {
+        // 只容纳capacity - 1个元素
         return (rear + 1) % elementData.length == front;
     }
 
     public int size() {
         return (rear - front + elementData.length) % elementData.length;
+//        return Math.abs(rear - front);
     }
 
     public void enQueue(E data) {
