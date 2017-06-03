@@ -1,4 +1,4 @@
-package com.coderising.miniJvm.GC;
+package com.coderising.miniJvm.gc;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,10 +7,10 @@ import java.util.List;
  * Created by zt
  * 2017/6/3 16:26
  */
-public class outOfMemory {
+public class OutOfMemory {
 
     public static void main(String[] args) {
-        outOfMemory outOfMemory = new outOfMemory();
+        OutOfMemory outOfMemory = new OutOfMemory();
         outOfMemory.outOfMemoryHeapSpace();
         outOfMemory.outOfMemoryPermGenSpace();
     }
