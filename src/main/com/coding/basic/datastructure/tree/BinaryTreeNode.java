@@ -37,13 +37,17 @@ public class BinaryTreeNode<T extends Comparable<T>> {
     public BinaryTreeNode<T> insert(T o) {
         BinaryTreeNode<T> newBinaryTreeNode = new BinaryTreeNode<>(o);
         BinaryTreeNode<T> parentNode = this.getParentNode(this, o);
-        if (o.compareTo(parentNode.data) < 0) {
+        int compareResult = o.compareTo(parentNode.data);
+        if (compareResult < 0) {
             parentNode.setLeft(newBinaryTreeNode);
-        } else {
+        } else if (compareResult > 0) {
             parentNode.setRight(newBinaryTreeNode);
+        } else {
+            return this;
         }
         return newBinaryTreeNode;
     }
+
 
     private BinaryTreeNode<T> getParentNode(BinaryTreeNode<T> parentNode, T o) {
         if (o.compareTo(parentNode.data) < 0) {

@@ -1,57 +1,32 @@
 package com.coding.basic.datastructure.tree;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 public class FileList {
 
     public void list(File f) {
-        MultiTree multiTree = new MultiTree(f);
-        listFiles(f, multiTree);
+        list(f, 0);
     }
 
-    private void listFiles(File f, MultiTree tree) {
-        File[] files = f.listFiles();
-        if (files != null && files.length > 0) {
-            for (int i = 0; i < files.length; i++) {
-                File file = files[i];
-                if (tree.getMultiTree() == null) {
-                    tree.setMultiTree(new ArrayList<>());
-                }
-                MultiTree<File> multiTree = new MultiTree<>(file);
-                tree.getMultiTree().add(multiTree);
-                if (file.isDirectory()) {
-                    listFiles(file, multiTree);
-                }
+    private void list(File f, int depth) {
+        printName(f, depth);
+        if (f.isDirectory()) {
+            File[] files = f.listFiles();
+            for (File file : files) {
+                list(file, depth + 1);
             }
         }
     }
 
-    class MultiTree<T> {
-
-        private T data;
-
-        private List<MultiTree> multiTree;
-
-        public MultiTree(T data) {
-            this.data = data;
+    private void printName(File file, int depth) {
+        String name = file.getName();
+        for (int i = 0; i < depth; i++) {
+            System.out.print("\t");
         }
-
-        public T getData() {
-            return data;
-        }
-
-        public void setData(T data) {
-            this.data = data;
-        }
-
-        public List<MultiTree> getMultiTree() {
-            return multiTree;
-        }
-
-        public void setMultiTree(List<MultiTree> multiTree) {
-            this.multiTree = multiTree;
+        if (file.isDirectory()) {
+            System.out.println("Dir: " + name);
+        } else {
+            System.out.println(file.getName());
         }
     }
 
